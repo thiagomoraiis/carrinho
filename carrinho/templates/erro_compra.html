@@ -1,0 +1,11 @@
+{% extends 'basep.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+
+{% block content %}
+<h1>Erro na compra</h1>
+<p>Um ou mais itens selecionados não possuem quantidade disponível suficiente.</p>
+
+{% bootstrap_javascript %}
+{% endblock %}

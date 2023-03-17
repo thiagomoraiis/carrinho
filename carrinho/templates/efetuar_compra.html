@@ -1,0 +1,15 @@
+{% extends 'basep.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="container">
+    <form class="form" action="" method="post">{% csrf_token %}
+        <h1 class="h3 text-gray-800">Confirmação de compra</h1>
+        <button type="submit" class="btn btn-success">Confimar</button>
+    </form>
+</div>
+{% bootstrap_javascript %}
+{% endblock %}

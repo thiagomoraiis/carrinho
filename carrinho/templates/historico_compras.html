@@ -1,0 +1,19 @@
+{% extends 'basep.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+
+{% block content %}
+<h1>Histórico de compras</h1>
+{% if carrinhos %}
+    <ul>
+        {% for carrinho in carrinhos %}
+            <li>Data: {{ carrinho.data }} - Total: {{ carrinho.total }} </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Não há histórico de compras.</p>
+{% endif %}
+
+{% bootstrap_javascript %}
+{% endblock %}

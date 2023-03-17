@@ -1,0 +1,23 @@
+{% extends 'basep.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+
+{% block content %}
+<h1>Carrinho de compras</h1>
+{% if carrinho %}
+    <h2>Itens no carrinho:</h2>
+    <ul>
+        {% for item_carrinho in itens_carrinho %}
+            <li>{{ item_carrinho.item.nome }} - Quantidade: {{ item_carrinho.quantidade }}</li>
+            <a href="{% url 'remover_item' item_carrinho.item.id %}">Remover</a>
+            <a href="{% url 'efetuar_compra' item_carrinho.item.id %}">Finalizar compra</a>
+        {% endfor %}
+    </ul>
+        
+{% else %}
+    <p>Não há itens no carrinho.</p>
+{% endif %}
+
+{% bootstrap_javascript %}
+{% endblock %}

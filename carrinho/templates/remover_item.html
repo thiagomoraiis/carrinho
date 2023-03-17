@@ -1,0 +1,19 @@
+{% extends 'basep.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="container">
+    <form class="form" action="" method="post">{% csrf_token %}
+        <h1 class="h3 text-gray-800">Confirmação de exclusão</h1>
+        <p class="text-gray">Deseja apagar o item ""?</p>
+        <div class="col">
+            <button type="submit" class="btn btn-danger">Confimar</button>
+            <a class="btn btn-primary" href="{% url 'home' %}">Voltar</a>    
+        </div>
+    </form>
+</div>
+{% bootstrap_javascript %}
+{% endblock %}
