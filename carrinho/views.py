@@ -64,6 +64,7 @@ def carrinho(request):
 
 def remover_item(request, id):
     item = get_object_or_404(Item, id=id)
+
     carrinho = Carrinho.objects.filter(status='aberto').first()
     item_carrinho = ItemCarrinho.objects.filter(carrinho=carrinho, item=item).first()
     if request.method == 'POST':
@@ -72,34 +73,37 @@ def remover_item(request, id):
         print(item.quantidade_disponivel)
         item.save()
         return redirect('carrinho')
+    
+    
+
     context = {
         'item_carrinho': item_carrinho,
         'item':item
     }
+
+
+
     return render(request, 'remover_item.html', context)
     # return redirect('carrinho')
 
 def efetuar_compra(request, id):
-    car = get_object_or_404(Carrinho, id=id)
+    item = get_object_or_404(Item, id=id)
     carrinho = Carrinho.objects.filter(status='aberto').first()
-    itens_carrinho = ItemCarrinho.objects.filter(carrinho=carrinho)
+    item_carrinho = ItemCarrinho.objects.filter(carrinho=carrinho, item=item).first()
     if request.method == 'POST':
-        for item_carrinho in itens_carrinho:
-            item = item_carrinho.item
-            if item_carrinho.quantidade > item.quantidade_disponivel:
-                return render(request, 'erro_compra.html')
-            item.quantidade_disponivel -= item_carrinho.quantidade
-            print(item.quantidade_disponivel)
-            item.save()
-        carrinho.status = 'fechado'
-        carrinho.save()
-        return redirect('home')
+        quantidade_item = item_carrinho.quantidade
+        item_carrinho.delete()
+        item.quantidade_disponivel -= quantidade_item
+        item.save()
+        return redirect('carrinho')
+    
     context = {
         'carrinho':carrinho,
-        'car':car
+        'car':item_carrinho
     }
     return render(request, 'efetuar_compra.html', context)
-    # return redirect('historico_compras')
+    # return redirect('carrinho')
+
 
 def historico_compras(request):
     carrinhos = Carrinho.objects.filter(status='fechado')

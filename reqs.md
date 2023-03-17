@@ -1,0 +1,3 @@
+-- Calcular o total de vendas de um produto
+-- Permitir buscas do produto (filtro)
+-- Histórico de vendas
